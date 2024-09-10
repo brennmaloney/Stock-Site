@@ -3,7 +3,7 @@
 
 
 <div class="Center">
-    Home
+    Login
 </div>
 
 
