@@ -1,24 +1,30 @@
 <script>
+    let stock_data = []
     let ticker = ''
-    let results = []
-    let errorMsg = ''
 
-    async function fetchStockData(ticker) {
-        const response = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${ticker}&apikey=${import.meta.env.API_KEY}`);
-        const data = await response.json();
-        return data.bestMatches || [];
+    async function fetchStockData() {
+        try {
+            const response = await fetch(`https://finnhub.io/api/v1/search?q=${ticker}&exchange=US&token=${import.meta.env.VITE_FINNHUB_API_KEY}`)
+            const data = await response.json()
+            return data
+        } catch (error) {
+            console.log('ERROR: failed to fetch stock data')
+        }
     }
 
     async function handleSearch() {
         if (ticker) {
             try {
-                results = await fetchStockData(ticker)
-                errorMsg = ''
+                stock_data = await fetchStockData()
+                console.log(stock_data)
             } catch (error) {
-                errorMsg = error
+                console.log('ERROR: failed to fetch stock data')
             }
+        } else {
+            stock_data = []
         }
     }
+    $: console.log(stock_data)
 </script>
 
 
@@ -27,16 +33,12 @@
     <button on:click={handleSearch}>Search</button>
 </div>
 
-<ul class="results">
-    {#each results as result}
-        <li>{result['1. symbol']} - {result['2. name']}</li>
-    {/each}
-</ul>
-
-{#if errorMsg}
-    <div class="error">
-        Error Has Occured
-    </div>
+{#if stock_data.count > 0}
+    <ul class="results">
+        {#each stock_data.result as stock}
+            <li>{stock.description}</li>
+        {/each}
+    </ul>
 {/if}
 
 <style>
