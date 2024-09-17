@@ -1,37 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
 :root {
     --gap: 24px;
-    --regular-font: 'NotoSansMedium';
-    --bold-font: 'NotoSansBold';
-    --off-white: #eae7dd;
-    --white: #ffffff;
-    --dark-grey: #202020;
-    --dark-blue: #1c316b;
-    --blue: #1e3a8a;
-    --green: #10b981;
-    --red: #dc2626;
 }
-
 body {
     margin: 0;
     padding: 0;
     height: 100%;
     min-height: 100vh;
-    background-color: var(--off-white);
-    color: var(--dark-grey);
 }
 
-* {
-    font-family: var(--regular-font);
+:* {
     letter-spacing: 1px;
 }
-
 h1 {
-    font-family: var(--bold-font);
     font-size: 1.7rem;
     margin: 0;
 }
 h2 {
-    font-family: var(--bold-font);
     font-size: 1.2rem;
     margin: 0;
 }
@@ -42,6 +32,10 @@ p {
 ul {
     padding: 0;
     margin: 0;
+    list-style-type: none;
+}
+br {
+    margin: calc(var(--gap)/2) 0;
 }
 
 .Uppercase {
@@ -67,7 +61,7 @@ ul {
         display: none !important;
     }
 }
-@font-face {
+/* @font-face {
     font-family: 'NotoSansRegular';
     src: url(./fonts/NotoSans-Regular.ttf);
 }
@@ -78,7 +72,7 @@ ul {
 @font-face {
     font-family: 'NotoSansBold';
     src: url(./fonts/NotoSans-Bold.ttf);
-}
+} */
 
 @media (max-width: 767px) {
     h1 {
@@ -118,7 +112,7 @@ ul {
     display: block;
     height: 5px;
     width: 100%;
-    background-color: var(--off-white);
+    /* background-color: var(--off-white); */
     border-radius: 25px;
     position: absolute;
     top: 50%;
@@ -148,7 +142,7 @@ ul {
 }
 .off-screen-menu {
     padding-top: calc(var(--gap) * 4);
-    background-color: var(--dark-blue);
+    /* background-color: var(--dark-blue); */
     height: 100%;
     width: 100%;
     position: fixed;
@@ -161,7 +155,7 @@ ul {
     transform: translateX(-10%);
 }
 .off-screen-menu-mobile.active {
-    transform: translateX(-60%);
+    transform: translateX(-30%);
 }
 .off-screen-menu ul {
     padding-left: var(--gap);
@@ -172,5 +166,5 @@ ul {
 .off-screen-menu a {
     font-size: 20px;
     text-decoration: none;
-    color: var(--off-white);
+    /* color: var(--off-white); */
 }

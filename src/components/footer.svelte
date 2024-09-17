@@ -2,14 +2,14 @@
     import "../global.css";
 </script>
 
-<div class="footer-container">    
+<div class="footer-background">    
     <div class="footer-section">
         <p class="copywrite Center Uppercase">Brennan Maloney 2024</p>
     </div>
 </div>
     
 <style>
-    .footer-container {
+    .footer-background {
         width: 100%;
         background-color: var(--dark-blue);
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
