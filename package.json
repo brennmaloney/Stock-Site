@@ -20,6 +20,7 @@
 	"type": "module",
 	"dependencies": {
 		"@vercel/speed-insights": "^1.0.12",
+		"chart.js": "^4.4.4",
 		"daisyui": "^4.12.10"
 	}
 }
