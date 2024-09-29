@@ -22,7 +22,6 @@
     }
 </script>
 
-<br/>
 <div class="px-4 py-2 md:px-8 md:py-2 text-white">
     <div class="grid sm:grid-cols-1 md:grid-cols-[1fr_3fr] gap-4">
         <div class="flex flex-col gap-4">
