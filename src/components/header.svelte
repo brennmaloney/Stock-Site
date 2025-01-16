@@ -1,5 +1,31 @@
 <script>
+    import { initializeAuthListener, signOutUser } from '../lib/firebase'
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { onMount } from 'svelte';
+
     let theme = 'business';
+    let user = null;
+
+
+    initializeAuthListener((authUser) => {
+        user = authUser;
+    });
+
+    function handleLogout() {
+        signOutUser();
+        showDialog();
+    }
+
+    function showDialog() {
+        if (document) {
+            document.getElementById('my_modal_5').showModal()
+        }
+    }
+    function hideDialog(){
+        if (document) {
+            document.getElementById('my_modal_5').close()
+        }
+    }
 
     function toggleTheme() {
         theme = theme === 'business' ? 'corporate' : 'business';
@@ -31,7 +57,6 @@
                 </h1>
             </a>
         </div>
-        <!-- <input type="checkbox" class="toggle bg-primary hover:bg-secondary mr-4" checked="checked" on:click={() => toggleTheme()}/> -->
         <label class="swap swap-rotate">
             <input type="checkbox" on:click={toggleTheme}/>
             <svg class="swap-on h-10 w-10 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -50,10 +75,27 @@
                 </svg>
             </div>
             <ul class="menu menu-md dropdown-content bg-accent rounded-box z-[1] mt-3 w-32 p-3 shadow text-white">
-                <li><a href="/">Login</a></li>
-                <li><a href="/">FAQ</a></li>
+                {#if user}
+                    <li><a href="/" on:click={handleLogout}>Logout</a></li>
+                {:else}
+                    <li><a href="/login">Login</a></li>
+                {/if}
+                <li><a href="/faq">FAQ</a></li>
             </ul>
         </div>
     </div>
 </div>
 
+{#if showDialog}
+    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">You have successfully logged out!</h3>
+            <p class="py-4">Come back later to check on your earnings!</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn" on:click={hideDialog}>Close</button>
+                </form>
+            </div>
+        </div>
+    </dialog>
+{/if}
