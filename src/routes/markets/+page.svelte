@@ -62,7 +62,7 @@
                 </div>
             {/if}
         </div>
-        <div>
+        <div class="Container">
             <Graph stock={selected_stock}/>
         </div>
     </div>

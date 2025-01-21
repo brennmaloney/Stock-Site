@@ -23,6 +23,11 @@ export const initializeAuthListener = (callback) => {
     });
 }
 
+export const setAuthPersistence = async (rememberMe) => {
+    const persistence = rememberMe ? browserLocalPersistence : "none";
+    await setPersistence(auth, persistence);
+}
+
 export const signUpUser = async (email, password, name_first, name_last) => {
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);

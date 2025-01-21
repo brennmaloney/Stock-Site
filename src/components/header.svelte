@@ -1,11 +1,9 @@
 <script>
     import { initializeAuthListener, signOutUser } from '../lib/firebase'
-    import { onAuthStateChanged } from 'firebase/auth';
-    import { onMount } from 'svelte';
 
     let theme = 'business';
     let user = null;
-
+    let modalOpen = false;
 
     initializeAuthListener((authUser) => {
         user = authUser;
@@ -13,28 +11,20 @@
 
     function handleLogout() {
         signOutUser();
-        showDialog();
-    }
-
-    function showDialog() {
-        if (document) {
-            document.getElementById('my_modal_5').showModal()
-        }
-    }
-    function hideDialog(){
-        if (document) {
-            document.getElementById('my_modal_5').close()
-        }
+        modalOpen = true;
     }
 
     function toggleTheme() {
         theme = theme === 'business' ? 'corporate' : 'business';
         document.body.setAttribute('data-theme', theme);
     }
+    const toggleModal = () => {
+        modalOpen = !modalOpen;
+    }
 </script>
 
-<div class="px-4 py-2 md:px-8 md:py-2">
-    <div class="navbar bg-base-100 h-16 p-0 gap-8">
+<div class="px-4 py-2 md:px-8 bg-base-200">
+    <div class="navbar bg-base-200 h-16 p-0 gap-8">
         <div class="dropdown">
             <div tabindex="0" role="button" class="btn btn-square btn-ghost rounded-lg text-2xl">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,16 +76,13 @@
     </div>
 </div>
 
-{#if showDialog}
-    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+
+{#if modalOpen}
+    <div class="modal modal-open rounded-lg" role="dialog">
         <div class="modal-box">
             <h3 class="text-lg font-bold">You have successfully logged out!</h3>
             <p class="py-4">Come back later to check on your earnings!</p>
-            <div class="modal-action">
-                <form method="dialog">
-                    <button class="btn" on:click={hideDialog}>Close</button>
-                </form>
-            </div>
         </div>
-    </dialog>
+        <label class="modal-backdrop" on:click={toggleModal}></label>
+    </div>
 {/if}

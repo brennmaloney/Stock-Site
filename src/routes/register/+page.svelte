@@ -23,7 +23,7 @@
     }
 </script>
 
-<div class="Center">
+<div class="Center rounded-lg p-6">
     <div class="flex flex-col gap-4 rounded-box bg-base-200 p-6 max-w-lg flex-1">
         <h1 class="text-3xl font-bold self-center">Register</h1>
 
